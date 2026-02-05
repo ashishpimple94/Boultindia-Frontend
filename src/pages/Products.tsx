@@ -33,16 +33,22 @@ export default function Products() {
         return;
       }
       
-      // Normalize backend products - convert single 'image' to 'images' array
-      const normalizedProducts = backendProducts.map(p => ({
-        ...p,
-        images: p.images || (p.image ? [p.image] : ['/placeholder-product.svg']),
-        rating: p.rating || 4.5,
-        reviews: p.reviews || 0,
-        variants: p.variants || []
-      }));
+      // Normalize backend products - backend now returns full URLs
+      const normalizedProducts = backendProducts.map(p => {
+        const imageUrl = p.image || '/placeholder-product.svg';
+        
+        return {
+          ...p,
+          images: p.images || [imageUrl],
+          image: imageUrl,
+          rating: p.rating || 4.5,
+          reviews: p.reviews || 0,
+          variants: p.variants || []
+        };
+      });
       
       console.log('✅ Normalized products:', normalizedProducts.length);
+      console.log('✅ First product image:', normalizedProducts[0]?.image);
       setProducts(normalizedProducts);
       
     } catch (error) {
