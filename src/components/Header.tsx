@@ -31,6 +31,9 @@ export default function Header() {
             <Link to="/products" className="font-body font-medium text-gray-700 hover:text-orange-600 transition">
               Products
             </Link>
+            <Link to="/track-order" className="font-body font-medium text-gray-700 hover:text-orange-600 transition">
+              Track Order
+            </Link>
             <Link to="/about" className="font-body font-medium text-gray-700 hover:text-orange-600 transition">
               About
             </Link>
@@ -90,6 +93,9 @@ export default function Header() {
             </Link>
             <Link to="/products" className="block px-4 py-2 font-body font-medium text-gray-700 hover:bg-gray-100 transition">
               Products
+            </Link>
+            <Link to="/track-order" className="block px-4 py-2 font-body font-medium text-gray-700 hover:bg-gray-100 transition">
+              Track Order
             </Link>
             <Link to="/about" className="block px-4 py-2 font-body font-medium text-gray-700 hover:bg-gray-100 transition">
               About

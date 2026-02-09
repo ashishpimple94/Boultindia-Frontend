@@ -231,17 +231,17 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
-              image: 'https://boultindia.com/wp-content/uploads/2022/09/20250604_1522_Car-Paint-Spray_simple_compose_01jwx5kacefgh8b6wr5ebbf7fv-1.png',
+              image: 'https://simbott.com/wp-content/uploads/2024/05/Automotive-Spray-Painting--1024x576.webp',
               title: 'Give Your Ride A New Life With Boult Spray Paint',
               subtitle: 'Restore, Refresh, Reimagine – The Power of Boult Spray Paint for Cars & Bikes'
             },
             {
-              image: 'https://boultindia.com/wp-content/uploads/2022/09/20250604_1626_Lubing-Motorbike-Chain_simple_compose_01jwx9azd0f2mb3w49p9knjbgv.png',
+              image: 'https://img.freepik.com/premium-photo/man-greasing-motorcycle-chain-close-up-hand_79405-13572.jpg',
               title: 'The Ultimate Duo For A Healthier Ride – Boult Chain Lubricant & Anti Rust Spray',
               subtitle: 'Smooth Chains, Rust-Free rides. The Essential Duo For Vehicle Maintenance.'
             },
             {
-              image: 'https://boultindia.com/wp-content/uploads/2022/09/mechanic-changing-engine-oil-car-vehicle-scaled.jpg',
+              image: 'https://img.freepik.com/premium-photo/engine-oil-splashing-isolated-white-background_1028938-293110.jpg',
               title: 'Keep Your Engine Younger, Longer With Boult Engine Oil Treatment',
               subtitle: 'More Miles, Less Trouble – The Engine Oil Upgrade Your Vehicle Needs'
             }

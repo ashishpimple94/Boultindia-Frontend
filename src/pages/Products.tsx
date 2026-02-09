@@ -70,20 +70,9 @@ export default function Products() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
-      <div className="mb-12 flex justify-between items-center">
-        <div>
-          <h1 className="text-5xl font-heading font-bold text-gray-900 mb-3">Our Products</h1>
-          <p className="text-gray-600 text-lg font-body">Discover our complete range of premium vehicle care products</p>
-        </div>
-        <button
-          onClick={() => {
-            console.log('🔄 Manual reload triggered');
-            loadAllProducts();
-          }}
-          className="bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 font-semibold transition"
-        >
-          🔄 Reload Products
-        </button>
+      <div className="mb-12">
+        <h1 className="text-5xl font-heading font-bold text-gray-900 mb-3">Our Products</h1>
+        <p className="text-gray-600 text-lg font-body">Discover our complete range of premium vehicle care products</p>
       </div>
 
       {/* Search and Filter */}
@@ -188,12 +177,41 @@ export default function Products() {
                       <span className="text-xs text-gray-500 font-body">({product.reviews})</span>
                     </div>
 
-                    <div className="flex justify-between items-center">
-                      <span className="text-lg font-heading font-bold text-orange-600">₹{product.price}</span>
-                      <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 font-body font-semibold">
-                        {product.category}
-                      </span>
-                    </div>
+                    {/* Price with Offer Display */}
+                    {product.onSale && product.originalPrice && product.originalPrice > product.price ? (
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-sm text-gray-400 line-through">₹{product.originalPrice}</span>
+                          <span className="text-xl font-heading font-bold text-orange-600">₹{product.price}</span>
+                        </div>
+                        <div className="flex items-center gap-1 flex-wrap">
+                          {(() => {
+                            const discount = product.originalPrice - product.price;
+                            const discountPercent = Math.round((discount / product.originalPrice) * 100);
+                            return (
+                              <>
+                                <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-sm">
+                                  ₹{discount} OFF
+                                </span>
+                                <span className="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-sm">
+                                  {discountPercent}% OFF
+                                </span>
+                              </>
+                            );
+                          })()}
+                          <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 font-body font-semibold">
+                            {product.category}
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex justify-between items-center">
+                        <span className="text-lg font-heading font-bold text-orange-600">₹{product.price}</span>
+                        <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 font-body font-semibold">
+                          {product.category}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </>
               ) : (
@@ -233,7 +251,32 @@ export default function Products() {
                     </div>
 
                     <div className="flex justify-between items-center">
-                      <span className="text-2xl font-bold text-orange-600">₹{product.price}</span>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {product.onSale && product.originalPrice && product.originalPrice > product.price ? (
+                          <>
+                            <span className="text-lg text-gray-400 line-through">₹{product.originalPrice}</span>
+                            <span className="text-2xl font-bold text-orange-600">₹{product.price}</span>
+                            {(() => {
+                              const discount = product.originalPrice - product.price;
+                              const discountPercent = Math.round((discount / product.originalPrice) * 100);
+                              
+                              // Show both badges for all discounts
+                              return (
+                                <>
+                                  <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow">
+                                    ₹{discount} OFF
+                                  </span>
+                                  <span className="bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                                    {discountPercent}% OFF
+                                  </span>
+                                </>
+                              );
+                            })()}
+                          </>
+                        ) : (
+                          <span className="text-2xl font-bold text-orange-600">₹{product.price}</span>
+                        )}
+                      </div>
                       <button className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 font-bold hover:from-orange-600 hover:to-orange-700 transition transform hover:scale-105 shadow-md">
                         View Details
                       </button>

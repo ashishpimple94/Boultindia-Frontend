@@ -3,6 +3,7 @@ import { useSearchParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { CheckCircle, Package, Truck, MapPin, Phone, Mail, Calendar } from 'lucide-react';
 import Invoice from '../components/Invoice';
+import OrderCancellation from '../components/OrderCancellation';
 
 interface Order {
   id: string;
@@ -31,6 +32,14 @@ export default function OrderConfirmation() {
     }
   }, [searchParams]);
 
+  // Save order details to localStorage for easy tracking later
+  useEffect(() => {
+    if (order) {
+      localStorage.setItem('lastOrderId', order.id);
+      localStorage.setItem('lastOrderEmail', order.email);
+    }
+  }, [order]);
+
   const fetchOrder = async (orderId: string) => {
     try {
       const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
@@ -44,6 +53,14 @@ export default function OrderConfirmation() {
       console.error('Error fetching order:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleOrderCancelled = () => {
+    // Refresh order data after cancellation
+    const orderId = searchParams.get('orderId');
+    if (orderId) {
+      fetchOrder(orderId);
     }
   };
 
@@ -255,7 +272,50 @@ export default function OrderConfirmation() {
             >
               Continue Shopping
             </Link>
+            
+            <Link
+              to="/track-order"
+              className="w-full block text-center bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition"
+            >
+              Track Your Order
+            </Link>
           </div>
+        </div>
+      </div>
+
+      {/* Order Cancellation Section - For Guest Users */}
+      {order.status !== 'cancelled' && order.status !== 'delivered' && order.status !== 'shipped' && (
+        <div className="mb-8">
+          <OrderCancellation
+            orderId={order.id}
+            orderStatus={order.status}
+            orderDate={order.date}
+            onCancelled={handleOrderCancelled}
+          />
+        </div>
+      )}
+
+      {/* Help Section */}
+      <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 text-center">
+        <h3 className="font-bold text-gray-900 mb-2">Need Help?</h3>
+        <p className="text-gray-600 mb-4">
+          If you have any questions about your order, please don't hesitate to contact us.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <Link
+            to="/contact"
+            className="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition font-semibold"
+          >
+            Contact Support
+          </Link>
+          <a
+            href="https://wa.me/919665154496"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold"
+          >
+            WhatsApp Us
+          </a>
         </div>
       </div>
     </div>

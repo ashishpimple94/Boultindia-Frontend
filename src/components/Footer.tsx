@@ -37,6 +37,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/track-order" className="font-body hover:text-orange-500 transition duration-300">
+                  Track Order
+                </Link>
+              </li>
+              <li>
                 <Link to="/cart" className="font-body hover:text-orange-500 transition duration-300">
                   Cart
                 </Link>
@@ -111,33 +116,71 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Latest Projects */}
+          {/* Shop on Other Platforms */}
           <div>
-            <h4 className="font-heading font-bold text-white mb-6 text-lg">Latest Projects</h4>
+            <h4 className="font-heading font-bold text-white mb-6 text-lg">Shop on Other Platforms</h4>
             <ul className="space-y-3 text-gray-400 text-sm">
               <li>
-                <a href="#" className="hover:text-orange-500 transition duration-300">
-                  Bike & Car Care
+                <a 
+                  href="https://www.amazon.in/s?k=boult+india" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-orange-500 transition duration-300"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726-1.53.406-3.045.61-4.516.61-2.265 0-4.463-.42-6.588-1.265-2.11-.84-3.98-2.036-5.61-3.59-.147-.138-.178-.273-.096-.434zm23.71-5.1c-.315-.196-.57-.348-.767-.46-.63-.353-1.244-.71-1.846-1.066-.674-.4-1.204-.747-1.592-1.04-.39-.294-.577-.59-.577-.89 0-.3.187-.596.577-.89.388-.293.918-.64 1.592-1.04.602-.356 1.216-.713 1.846-1.066.197-.112.452-.264.767-.46.316-.196.526-.196.63 0 .106.196.03.436-.226.72-.256.284-.526.568-.81.852-.285.284-.526.568-.726.852-.2.284-.3.568-.3.852s.1.568.3.852c.2.284.44.568.726.852.284.284.554.568.81.852.256.284.332.524.226.72-.104.196-.314.196-.63 0z"/>
+                  </svg>
+                  Amazon
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-orange-500 transition duration-300">
-                  Spray Paints
+                <a 
+                  href="https://www.flipkart.com/search?q=boult+india" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-orange-500 transition duration-300"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3.833 0C1.718 0 0 1.718 0 3.833v16.334C0 22.282 1.718 24 3.833 24h16.334C22.282 24 24 22.282 24 20.167V3.833C24 1.718 22.282 0 20.167 0H3.833zm8.797 5.953c.93 0 1.685.755 1.685 1.685s-.755 1.685-1.685 1.685-1.685-.755-1.685-1.685.755-1.685 1.685-1.685zm-5.39 2.247h2.247v9.6H7.24v-9.6zm8.797 0h2.247v9.6h-2.247v-9.6z"/>
+                  </svg>
+                  Flipkart
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-orange-500 transition duration-300">
-                  Car Accessories
+                <a 
+                  href="https://www.meesho.com/boult-india/pl/3rvqp" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-orange-500 transition duration-300"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                  </svg>
+                  Meesho
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-orange-500 transition duration-300">
-                  Detailing & Cleaning
+                <a 
+                  href="https://www.indiamart.com/boult-india/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-orange-500 transition duration-300"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                  </svg>
+                  IndiaMART
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-orange-500 transition duration-300">
-                  Oil Additives & Flushes
+                <a 
+                  href="/contact" 
+                  className="flex items-center gap-2 hover:text-orange-500 transition duration-300"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  </svg>
+                  Become a Distributor
                 </a>
               </li>
             </ul>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { User, Package, LogOut, Mail, Phone, MapPin, Calendar } from 'lucide-react';
+import OrderCancellation from '../components/OrderCancellation';
 
 interface Order {
   id: string;
@@ -293,9 +294,37 @@ export default function Account() {
 
                       {/* Delivery Address */}
                       {order.address && (
-                        <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                        <div className="bg-blue-50 rounded-lg p-4 border border-blue-200 mb-4">
                           <p className="text-xs text-blue-600 font-semibold uppercase mb-2">Delivery Address</p>
                           <p className="text-sm text-gray-900">{order.address}</p>
+                        </div>
+                      )}
+
+                      {/* Cancel Order Button */}
+                      {order.status !== 'cancelled' && order.status !== 'delivered' && order.status !== 'shipped' && (
+                        <div className="mt-4">
+                          <OrderCancellation
+                            orderId={order.id}
+                            orderStatus={order.status}
+                            orderDate={order.date}
+                            onCancelled={() => {
+                              // Refresh orders after cancellation
+                              const fetchOrders = async () => {
+                                try {
+                                  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
+                                  const response = await fetch(`${backendUrl}/api/orders`);
+                                  if (response.ok) {
+                                    const data = await response.json();
+                                    const userOrders = data.orders.filter((o: any) => o.email === user?.email);
+                                    setOrders(userOrders);
+                                  }
+                                } catch (error) {
+                                  console.error('Error refreshing orders:', error);
+                                }
+                              };
+                              fetchOrders();
+                            }}
+                          />
                         </div>
                       )}
                     </div>

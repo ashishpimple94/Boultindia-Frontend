@@ -1,53 +1,92 @@
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { apiService } from '../services/api';
 
 interface Banner {
-  id: number;
+  id: string;
+  title: string;
   image: string;
-  alt: string;
+  link?: string;
+  active: boolean;
+  order: number;
 }
 
-const banners: Banner[] = [
+// Fallback banners if API fails
+const fallbackBanners: Banner[] = [
   {
-    id: 1,
+    id: '1',
+    title: 'Boult Banner 1',
     image: '/Bner1.png',
-    alt: 'Boult Banner 1'
+    active: true,
+    order: 0
   },
   {
-    id: 2,
+    id: '2',
+    title: 'Boult Banner 2',
     image: '/baner2.jpg',
-    alt: 'Boult Banner 2'
+    active: true,
+    order: 1
   },
   {
-    id: 3,
+    id: '3',
+    title: 'Boult Banner 3',
     image: '/baner3.png',
-    alt: 'Boult Banner 3'
+    active: true,
+    order: 2
   },
   {
-    id: 4,
+    id: '4',
+    title: 'Boult Banner 4',
     image: '/baner4.jpg',
-    alt: 'Boult Banner 4'
+    active: true,
+    order: 3
   },
   {
-    id: 5,
+    id: '5',
+    title: 'Boult Banner 5',
     image: '/baner5.png',
-    alt: 'Boult Banner 5'
+    active: true,
+    order: 4
   }
 ];
 
 export default function BannerSlider() {
+  const [banners, setBanners] = useState<Banner[]>(fallbackBanners);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!autoPlay) return;
+    loadBanners();
+  }, []);
+
+  const loadBanners = async () => {
+    try {
+      const data = await apiService.getBanners();
+      if (data && data.length > 0) {
+        setBanners(data);
+        console.log('✅ Loaded', data.length, 'banners from API');
+      } else {
+        console.log('⚠️ No banners from API, using fallback');
+        setBanners(fallbackBanners);
+      }
+    } catch (error) {
+      console.error('Error loading banners:', error);
+      setBanners(fallbackBanners);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!autoPlay || banners.length === 0) return;
     
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % banners.length);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [autoPlay]);
+  }, [autoPlay, banners.length]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % banners.length);
@@ -64,6 +103,14 @@ export default function BannerSlider() {
     setAutoPlay(false);
   };
 
+  if (loading || banners.length === 0) {
+    return (
+      <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[180px] sm:h-[280px] md:h-96 lg:h-[500px] bg-gray-200 flex items-center justify-center">
+        <div className="text-gray-500">Loading banners...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] h-[180px] sm:h-[280px] md:h-96 lg:h-[500px] bg-gray-900 overflow-hidden group">
       {/* Slides */}
@@ -75,11 +122,21 @@ export default function BannerSlider() {
               index === currentSlide ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            <img
-              src={banner.image}
-              alt={banner.alt}
-              className="w-full h-full object-contain object-center"
-            />
+            {banner.link ? (
+              <a href={banner.link} className="block w-full h-full">
+                <img
+                  src={banner.image}
+                  alt={banner.title}
+                  className="w-full h-full object-contain object-center"
+                />
+              </a>
+            ) : (
+              <img
+                src={banner.image}
+                alt={banner.title}
+                className="w-full h-full object-contain object-center"
+              />
+            )}
             {/* Overlay */}
             <div className="absolute inset-0 bg-black opacity-20"></div>
           </div>

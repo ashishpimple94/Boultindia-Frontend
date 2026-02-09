@@ -172,8 +172,26 @@ export default function Home() {
 
                     {/* Price Section */}
                     <div className="mb-5 flex-1">
-                      <div className="flex items-baseline gap-3">
-                        <span className="text-3xl font-heading font-bold text-orange-600">₹{product.price}</span>
+                      <div className="flex items-baseline gap-2 flex-wrap">
+                        {product.onSale && product.originalPrice && product.originalPrice > product.price ? (() => {
+                          const discount = product.originalPrice - product.price;
+                          const discountPercent = Math.round((discount / product.originalPrice) * 100);
+                          
+                          return (
+                            <>
+                              <span className="text-xl text-gray-400 line-through">₹{product.originalPrice}</span>
+                              <span className="text-3xl font-heading font-bold text-orange-600">₹{product.price}</span>
+                              <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white text-sm font-bold px-2 py-1 rounded-full shadow">
+                                ₹{discount} OFF
+                              </span>
+                              <span className="bg-green-500 text-white text-sm font-bold px-2 py-1 rounded-full">
+                                {discountPercent}% OFF
+                              </span>
+                            </>
+                          );
+                        })() : (
+                          <span className="text-3xl font-heading font-bold text-orange-600">₹{product.price}</span>
+                        )}
                       </div>
                     </div>
 

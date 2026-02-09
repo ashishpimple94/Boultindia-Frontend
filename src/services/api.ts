@@ -120,6 +120,64 @@ class ApiService {
       return false;
     }
   }
+
+  async getBanners(): Promise<any[]> {
+    try {
+      const response = await this.retryRequest(() =>
+        this.api.get('/api/banners/active')
+      );
+      return response.data.banners || [];
+    } catch (error) {
+      console.error('Failed to fetch banners:', error);
+      return [];
+    }
+  }
+
+  async sendContactEmail(contactData: any): Promise<{ success: boolean; error?: string }> {
+    try {
+      const response = await this.retryRequest(() =>
+        this.api.post('/api/contact', contactData)
+      );
+      return {
+        success: true
+      };
+    } catch (error: any) {
+      console.error('Failed to send contact email:', error);
+      return {
+        success: false,
+        error: error.response?.data?.error || 'Failed to send message'
+      };
+    }
+  }
+
+  async getReviews(productId: string): Promise<any[]> {
+    try {
+      const response = await this.retryRequest(() =>
+        this.api.get(`/api/reviews/${productId}`)
+      );
+      return response.data.reviews || [];
+    } catch (error) {
+      console.error('Failed to fetch reviews:', error);
+      return [];
+    }
+  }
+
+  async submitReview(reviewData: any): Promise<{ success: boolean; error?: string }> {
+    try {
+      const response = await this.retryRequest(() =>
+        this.api.post('/api/reviews', reviewData)
+      );
+      return {
+        success: true
+      };
+    } catch (error: any) {
+      console.error('Failed to submit review:', error);
+      return {
+        success: false,
+        error: error.response?.data?.error || 'Failed to submit review'
+      };
+    }
+  }
 }
 
 export const apiService = new ApiService();

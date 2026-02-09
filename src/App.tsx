@@ -4,6 +4,8 @@ import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import WhatsAppButton from './components/WhatsAppButton';
+import DiscountBanner from './components/DiscountBanner';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
@@ -15,6 +17,8 @@ import Account from './pages/Account';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import OrderConfirmation from './pages/OrderConfirmation';
+import TrackOrder from './pages/TrackOrder';
+import BusinessEnquiry from './pages/BusinessEnquiry';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import ReturnRefundPolicy from './pages/ReturnRefundPolicy';
 import ShippingPolicy from './pages/ShippingPolicy';
@@ -40,6 +44,9 @@ function App() {
         <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <ScrollToTop />
           <div className="flex flex-col min-h-screen bg-gray-50">
+            {/* Discount Banner */}
+            <DiscountBanner />
+            
             {/* Topbar Image */}
             <div className="w-full flex justify-center bg-white">
               <img 
@@ -61,6 +68,8 @@ function App() {
                 <Route path="/account" element={<Account />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/track-order" element={<TrackOrder />} />
+                <Route path="/business-enquiry" element={<BusinessEnquiry />} />
                 <Route path="/order-confirmation" element={<OrderConfirmation />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/return-refund-policy" element={<ReturnRefundPolicy />} />
@@ -70,6 +79,7 @@ function App() {
               </Routes>
             </main>
             <Footer />
+            <WhatsAppButton />
           </div>
         </Router>
       </CartProvider>

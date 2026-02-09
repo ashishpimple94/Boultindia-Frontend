@@ -1,23 +1,43 @@
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, MessageSquare, Clock } from 'lucide-react';
+import { apiService } from '../services/api';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    enquiryType: 'general',
     subject: '',
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-      setSubmitted(false);
-    }, 3000);
+    setLoading(true);
+    setError('');
+
+    try {
+      const result = await apiService.sendContactEmail(formData);
+      
+      if (result.success) {
+        setSubmitted(true);
+        setTimeout(() => {
+          setFormData({ name: '', email: '', phone: '', enquiryType: 'general', subject: '', message: '' });
+          setSubmitted(false);
+        }, 5000);
+      } else {
+        setError(result.error || 'Failed to send message. Please try again.');
+      }
+    } catch (err) {
+      console.error('Contact form error:', err);
+      setError('Failed to send message. Please try again or email us directly.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const contactInfo = [
@@ -31,7 +51,7 @@ export default function Contact() {
       icon: Mail,
       title: 'Email',
       details: 'vtechmultisolutions@gmail.com',
-      subtext: 'We reply within 24 hours'
+      subtext: 'orders@boultindia.com'
     },
     {
       icon: MapPin,
@@ -96,7 +116,7 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Name */}
                 <div>
-                  <label className="block text-gray-700 font-semibold text-sm mb-2">Full Name</label>
+                  <label className="block text-gray-700 font-semibold text-sm mb-2">Full Name *</label>
                   <input
                     type="text"
                     value={formData.name}
@@ -109,7 +129,7 @@ export default function Contact() {
 
                 {/* Email */}
                 <div>
-                  <label className="block text-gray-700 font-semibold text-sm mb-2">Email Address</label>
+                  <label className="block text-gray-700 font-semibold text-sm mb-2">Email Address *</label>
                   <input
                     type="email"
                     value={formData.email}
@@ -132,9 +152,26 @@ export default function Contact() {
                   />
                 </div>
 
+                {/* Enquiry Type */}
+                <div>
+                  <label className="block text-gray-700 font-semibold text-sm mb-2">Enquiry Type *</label>
+                  <select
+                    value={formData.enquiryType}
+                    onChange={(e) => setFormData({ ...formData, enquiryType: e.target.value })}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-orange-500 transition bg-white"
+                    required
+                  >
+                    <option value="general">General Inquiry</option>
+                    <option value="distributorship">Enquiry for Distributorship</option>
+                    <option value="orders">Contact for Orders Query</option>
+                    <option value="technical">Technical Support</option>
+                    <option value="bulk">Bulk Orders</option>
+                  </select>
+                </div>
+
                 {/* Subject */}
                 <div>
-                  <label className="block text-gray-700 font-semibold text-sm mb-2">Subject</label>
+                  <label className="block text-gray-700 font-semibold text-sm mb-2">Subject *</label>
                   <input
                     type="text"
                     value={formData.subject}
@@ -147,7 +184,7 @@ export default function Contact() {
 
                 {/* Message */}
                 <div>
-                  <label className="block text-gray-700 font-semibold text-sm mb-2">Message</label>
+                  <label className="block text-gray-700 font-semibold text-sm mb-2">Message *</label>
                   <textarea
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
@@ -158,13 +195,30 @@ export default function Contact() {
                   />
                 </div>
 
+                {/* Error Message */}
+                {error && (
+                  <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4 text-red-700">
+                    {error}
+                  </div>
+                )}
+
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-lg font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                  disabled={loading}
+                  className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-lg font-bold hover:from-orange-600 hover:to-orange-700 transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Send size={20} />
-                  Send Message
+                  {loading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send size={20} />
+                      Send Message
+                    </>
+                  )}
                 </button>
               </form>
             )}

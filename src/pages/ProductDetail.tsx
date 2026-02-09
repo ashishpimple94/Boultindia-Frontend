@@ -4,6 +4,8 @@ import { useCart } from '../context/CartContext';
 import { ShoppingCart, ArrowLeft, Star, Check, Truck, Shield } from 'lucide-react';
 import { products as staticProducts } from '../data/products';
 import { apiService } from '../services/api';
+import ReviewForm from '../components/ReviewForm';
+import ReviewList from '../components/ReviewList';
 
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
@@ -36,7 +38,6 @@ export default function ProductDetail() {
         rating: p.rating || 4.5,
         reviews: p.reviews || 0,
         variants: p.variants || [],
-        specifications: p.specifications || [],
         directions: p.directions || [],
         benefits: p.benefits || []
       }));
@@ -183,34 +184,30 @@ export default function ProductDetail() {
           {/* Price Section */}
           <div className="bg-gradient-to-r from-orange-50 to-orange-100 rounded-xl p-6 border border-orange-200">
             <p className="text-gray-600 text-sm mb-2">Price</p>
-            <div className="flex items-baseline gap-3">
+            <div className="flex items-baseline gap-3 flex-wrap">
               <span className="text-4xl font-bold text-orange-600">
                 ₹{product.variants && product.variants.length > 0 && product.variants[selectedVariant] 
                   ? product.variants[selectedVariant].price 
                   : product.price}
               </span>
-              {product.onSale && product.discount && (
-                <>
-                  <span className="text-xl text-gray-500 line-through">
-                    ₹{Math.round((
-                      product.variants && product.variants.length > 0 && product.variants[selectedVariant]
-                        ? product.variants[selectedVariant].price 
-                        : product.price
-                    ) / (1 - product.discount / 100))}
-                  </span>
-                  <span className="text-green-600 font-bold text-lg">
-                    Save ₹{Math.round((
-                      product.variants && product.variants.length > 0 && product.variants[selectedVariant]
-                        ? product.variants[selectedVariant].price 
-                        : product.price
-                    ) / (1 - product.discount / 100) - (
-                      product.variants && product.variants.length > 0 && product.variants[selectedVariant]
-                        ? product.variants[selectedVariant].price 
-                        : product.price
-                    ))}
-                  </span>
-                </>
-              )}
+              {product.onSale && product.originalPrice && product.originalPrice > product.price && (() => {
+                const discount = product.originalPrice - product.price;
+                const discountPercent = Math.round((discount / product.originalPrice) * 100);
+                
+                return (
+                  <>
+                    <span className="text-2xl text-gray-400 line-through">
+                      ₹{product.originalPrice}
+                    </span>
+                    <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold text-lg px-4 py-2 rounded-full shadow-lg animate-pulse">
+                      ₹{discount} OFF
+                    </span>
+                    <span className="bg-green-500 text-white font-bold text-sm px-3 py-1 rounded-full">
+                      {discountPercent}% OFF
+                    </span>
+                  </>
+                );
+              })()}
             </div>
           </div>
 
@@ -290,7 +287,7 @@ export default function ProductDetail() {
       {/* Tabs Section */}
       <div className="mt-16 border-t border-gray-200 pt-12">
         <div className="flex gap-8 border-b border-gray-200 mb-8">
-          {['description', 'specifications', 'directions', 'benefits'].map((tab) => (
+          {['description', 'directions', 'benefits', 'reviews'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -300,7 +297,7 @@ export default function ProductDetail() {
                   : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              {tab}
+              {tab === 'reviews' ? `Reviews (${product.reviews || 0})` : tab}
             </button>
           ))}
         </div>
@@ -310,17 +307,6 @@ export default function ProductDetail() {
           {activeTab === 'description' && (
             <div className="space-y-4">
               <p className="text-gray-700 text-lg leading-relaxed">{product.description}</p>
-            </div>
-          )}
-
-          {activeTab === 'specifications' && product.specifications && (
-            <div className="space-y-3">
-              {product.specifications.map((spec, idx) => (
-                <div key={idx} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                  <Check size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                  <span className="text-gray-700">{spec}</span>
-                </div>
-              ))}
             </div>
           )}
 
@@ -345,6 +331,19 @@ export default function ProductDetail() {
                   <span className="text-gray-700">{benefit}</span>
                 </div>
               ))}
+            </div>
+          )}
+
+          {activeTab === 'reviews' && (
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Customer Reviews</h3>
+                <ReviewList productId={product.id} />
+              </div>
+              <div className="border-t border-gray-200 pt-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Write a Review</h3>
+                <ReviewForm productId={product.id} productName={product.name} onReviewSubmitted={loadProduct} />
+              </div>
             </div>
           )}
         </div>
