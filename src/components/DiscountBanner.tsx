@@ -26,15 +26,6 @@ export default function DiscountBanner() {
       bgColor: 'from-orange-500 to-red-500'
     },
     {
-      id: 'BULK20',
-      title: 'Bulk Order Discount',
-      description: 'Buy 5 or more products and save 20%',
-      code: 'BULK20',
-      discount: '20%',
-      validUntil: '30 Apr 2026',
-      bgColor: 'from-blue-500 to-purple-500'
-    },
-    {
       id: 'FREESHIP',
       title: 'Free Shipping',
       description: 'Free shipping on all orders above ₹999',
