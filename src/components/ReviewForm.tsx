@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Star } from 'lucide-react';
 import Toast from './Toast';
+import { apiService } from '../services/api';
 
 interface ReviewFormProps {
   productId: string;
@@ -36,28 +37,22 @@ export default function ReviewForm({ productId, productName, onReviewSubmitted }
     setIsSubmitting(true);
 
     try {
-      const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
-      const response = await fetch(`${backendUrl}/api/reviews`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          productId,
-          productName,
-          rating,
-          ...formData,
-          submittedAt: new Date().toISOString(),
-          verified: false,
-          helpful: 0,
-        }),
+      const result = await apiService.submitReview({
+        productId,
+        customerName: formData.name,
+        email: formData.email,
+        title: formData.title,
+        comment: formData.comment,
+        rating
       });
 
-      if (response.ok) {
-        setToast({ message: 'Review submitted successfully! It will be visible after moderation.', type: 'success' });
+      if (result.success) {
+        setToast({ message: 'Review submitted successfully!', type: 'success' });
         setFormData({ name: '', email: '', title: '', comment: '' });
         setRating(0);
         if (onReviewSubmitted) onReviewSubmitted();
       } else {
-        throw new Error('Failed to submit review');
+        throw new Error(result.error || 'Failed to submit review');
       }
     } catch (error) {
       console.error('Error submitting review:', error);

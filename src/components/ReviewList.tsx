@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Star, ThumbsUp, CheckCircle } from 'lucide-react';
+import { apiService } from '../services/api';
 
 interface Review {
   id: string;
   productId: string;
-  name: string;
+  customerName: string;
   rating: number;
   title: string;
   comment: string;
-  submittedAt: string;
+  createdAt: string;
   verified: boolean;
   helpful: number;
 }
@@ -28,12 +29,8 @@ export default function ReviewList({ productId }: ReviewListProps) {
 
   const fetchReviews = async () => {
     try {
-      const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
-      const response = await fetch(`${backendUrl}/api/reviews/${productId}`);
-      if (response.ok) {
-        const data = await response.json();
-        setReviews(data.reviews || []);
-      }
+      const data = await apiService.getReviews(productId);
+      setReviews(data);
     } catch (error) {
       console.error('Error fetching reviews:', error);
     } finally {
@@ -45,7 +42,7 @@ export default function ReviewList({ productId }: ReviewListProps) {
     if (sortBy === 'rating') {
       return b.rating - a.rating;
     }
-    return new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime();
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 
   const averageRating = reviews.length > 0
@@ -142,7 +139,7 @@ export default function ReviewList({ productId }: ReviewListProps) {
               <div className="flex justify-between items-start mb-3">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="font-bold text-gray-900">{review.name}</span>
+                    <span className="font-bold text-gray-900">{review.customerName}</span>
                     {review.verified && (
                       <span className="flex items-center gap-1 text-green-600 text-xs">
                         <CheckCircle size={14} />
@@ -165,7 +162,7 @@ export default function ReviewList({ productId }: ReviewListProps) {
                   </div>
                 </div>
                 <span className="text-sm text-gray-500">
-                  {new Date(review.submittedAt).toLocaleDateString('en-IN', {
+                  {new Date(review.createdAt).toLocaleDateString('en-IN', {
                     year: 'numeric',
                     month: 'short',
                     day: 'numeric',
