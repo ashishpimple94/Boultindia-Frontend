@@ -369,8 +369,9 @@ export default function Checkout() {
       const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
       const orderId = `ORDER_${Date.now()}`;
 
-      // Format items with all details including image
+      // Format items with all details including image and productId
       const orderItems = cart.items.map(item => ({
+        productId: item.product.id,
         name: item.product.name,
         variant: item.variant || 'Default',
         quantity: item.quantity,
