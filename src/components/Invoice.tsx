@@ -13,6 +13,7 @@ interface InvoiceProps {
     state: string;
     pincode: string;
     amount: number;
+    shippingCharges?: number;
     status: string;
     date: string;
     items: any[];
@@ -27,8 +28,10 @@ const COMPANY_LOGO = '/logos/logo1.png'; // Local logo path
 
 const Invoice: React.FC<InvoiceProps> = ({ order, showPrintButton = true }) => {
   const [isGeneratingPDF, setIsGeneratingPDF] = React.useState(false);
+  const shippingCharges = order.shippingCharges || 0;
   const subtotal = order.amount / (1 + GST_RATE);
   const gstAmount = order.amount - subtotal;
+  const grandTotal = order.amount + shippingCharges;
 
   const handlePrint = () => {
     window.print();
@@ -209,13 +212,19 @@ const Invoice: React.FC<InvoiceProps> = ({ order, showPrintButton = true }) => {
                 <span className="text-gray-700 font-semibold text-sm sm:text-base">Subtotal (Before GST):</span>
                 <span className="text-gray-900 font-bold text-sm sm:text-base">₹{subtotal.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
               </div>
-              <div className="flex justify-between mb-4 pb-4 border-b border-gray-300">
+              <div className="flex justify-between mb-3 pb-3 border-b border-gray-300">
                 <span className="text-gray-700 font-semibold text-sm sm:text-base">GST (18%):</span>
                 <span className="text-orange-600 font-bold text-sm sm:text-base">₹{gstAmount.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
               </div>
+              {shippingCharges > 0 && (
+                <div className="flex justify-between mb-4 pb-4 border-b border-gray-300">
+                  <span className="text-gray-700 font-semibold text-sm sm:text-base">Shipping Charges:</span>
+                  <span className="text-blue-600 font-bold text-sm sm:text-base">₹{shippingCharges.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+                </div>
+              )}
               <div className="flex justify-between bg-gradient-to-r from-orange-600 to-orange-700 text-white p-3 sm:p-4 rounded-lg">
                 <span className="font-bold text-base sm:text-lg">Total Amount:</span>
-                <span className="font-bold text-base sm:text-lg">₹{order.amount.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
+                <span className="font-bold text-base sm:text-lg">₹{grandTotal.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</span>
               </div>
             </div>
           </div>
