@@ -502,6 +502,60 @@ export const products: Product[] = [
     onSale: false
   },
   {
+    id: 'injectonic-fuel-system-booster',
+    name: 'Injectonic - Fuel System Booster',
+    description: 'Boult Injectonic is a specially designed injector cleaner which cleans the fuel system without dismantling the injectors. It is designed to provide excellent performance, power and efficiency. Cleans the entire fuel system and removes carbon deposits.',
+    price: 150,
+    category: 'treatment',
+    images: [
+      '/img18-2-2-1.png'
+    ],
+    rating: 4.5,
+    reviews: 142,
+    variants: [
+      { name: '5ml (Bikes)', price: 150 },
+      { name: '20ml (3 Wheelers)', price: 280 },
+      { name: '100ml (Cars)', price: 450 },
+      { name: '250ml (LCVs/HCVs)', price: 850 }
+    ],
+    specifications: [
+      'Cleans entire fuel system',
+      'Removes carbon deposits',
+      'Improves fuel injection system life',
+      'Cleans injector nozzles',
+      'Ensures correct spray pattern',
+      'Optimizes fuel consumption',
+      'Increases fuel efficiency',
+      'Enhances complete combustion',
+      'Boosts engine performance',
+      'Helps reduce emissions'
+    ],
+    directions: [
+      'Pour Boult Injectonic in fuel tank during filling',
+      'Add as per recommended dosage for your vehicle',
+      'Keep engine running for 5 minutes in idle condition',
+      'Recommended at every service interval',
+      'Use when experiencing heavy black smoke',
+      'Dosage: 5ml for Bikes, 20ml for 3 wheelers, 100ml for Cars, 250ml for LCVs/HCVs'
+    ],
+    benefits: [
+      'Cleans entire fuel system effectively',
+      'Removes carbon deposits completely',
+      'Improves fuel injection system life',
+      'Cleans injector nozzles thoroughly',
+      'Ensures correct fuel spray pattern',
+      'Optimizes fuel consumption',
+      'Increases fuel efficiency significantly',
+      'Enhances complete combustion',
+      'Boosts engine performance',
+      'Helps reduce harmful emissions',
+      'No dismantling required',
+      'Easy to use and apply'
+    ],
+    featured: true,
+    onSale: false
+  },
+  {
     id: 'four-wheeler-kit',
     name: 'Four Wheeler Kit',
     description: 'Complete car care kit with 6 premium Boult products. Includes Plastic and Fibre Restorer, Anti Rust Spray, Microfiber Cloth, All in One Polish, Windshield Screen Wash, and Car Wash Soap. Everything you need for professional car maintenance and detailing.',
@@ -696,6 +750,57 @@ export const products: Product[] = [
       'Professional-grade formula',
       'Long-lasting protection',
       'Compatible with all cooling systems'
+    ],
+    featured: false,
+    onSale: false
+  },
+  {
+    id: 'petrol-additive',
+    name: 'Petrol Additive',
+    description: 'Boult Petrol Additive is designed to clean and protect the fuel system including the injectors and intake valves. It ensures longer engine life, better power generation, and fuel saving. Cleans injectors and intake valves from carbon deposits.',
+    price: 50,
+    category: 'additive',
+    images: [
+      '/img18-2-2-1.png'
+    ],
+    rating: 4.4,
+    reviews: 167,
+    variants: [
+      { name: '5ml', price: 50 },
+      { name: '25ml', price: 180 }
+    ],
+    specifications: [
+      'Cleans injectors effectively',
+      'Cleans intake valves',
+      'Removes carbon deposits',
+      'Reduces misfire',
+      'Reduces ignition delay',
+      'Provides better combustion',
+      'Improves power generation',
+      'Improves fuel economy',
+      'Enhances engine life'
+    ],
+    directions: [
+      'Pour the contents into the petrol tank',
+      'Add as per recommended mixing ratio',
+      'For best results use at every fuel recharge',
+      'Mix thoroughly with fuel',
+      'Run engine normally after adding',
+      'Use regularly for optimal performance'
+    ],
+    benefits: [
+      'Cleans injectors from carbon deposits',
+      'Cleans intake valves effectively',
+      'Reduces misfire significantly',
+      'Reduces ignition delay',
+      'Provides better fuel combustion',
+      'Improves power generation',
+      'Improves fuel economy',
+      'Enhances engine life',
+      'Protects fuel system',
+      'Easy to use',
+      'Cost-effective solution',
+      'Regular use maintains performance'
     ],
     featured: false,
     onSale: false
