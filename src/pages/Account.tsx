@@ -333,30 +333,95 @@ export default function Account() {
                         </div>
                       )}
 
-                      {/* Delivery Information - Show when order is processing */}
-                      {order.status === 'processing' && ((order as any).deliveryDate || (order as any).courierPartner) && (
-                        <div className="bg-green-50 rounded-lg p-4 border border-green-200 mb-4">
-                          <p className="text-xs text-green-600 font-semibold uppercase mb-3">📦 Delivery Information</p>
-                          <div className="grid grid-cols-2 gap-4">
-                            {(order as any).deliveryDate && (
+                      {/* Delivery Information - Show when order is processing/shipped/delivered */}
+                      {(order.status === 'processing' || order.status === 'shipped' || order.status === 'delivered') && (
+                        <div className="space-y-3 mb-4">
+                          {/* Processing Info */}
+                          {order.status === 'processing' && ((order as any).deliveryDate || (order as any).courierPartner || (order as any).processingDateTime) && (
+                            <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
+                              <p className="text-xs text-purple-600 font-semibold uppercase mb-3">📦 Processing Information</p>
+                              <div className="grid grid-cols-2 gap-4">
+                                {(order as any).processingDateTime && (
+                                  <div>
+                                    <p className="text-xs text-gray-600 font-semibold">Processing Started</p>
+                                    <p className="text-sm font-bold text-gray-900 mt-1">
+                                      {new Date((order as any).processingDateTime).toLocaleString('en-IN', {
+                                        day: 'numeric',
+                                        month: 'short',
+                                        year: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit'
+                                      })}
+                                    </p>
+                                  </div>
+                                )}
+                                {(order as any).deliveryDate && (
+                                  <div>
+                                    <p className="text-xs text-gray-600 font-semibold">Expected Delivery</p>
+                                    <p className="text-sm font-bold text-gray-900 mt-1">
+                                      {new Date((order as any).deliveryDate).toLocaleDateString('en-IN', {
+                                        day: 'numeric',
+                                        month: 'short',
+                                        year: 'numeric'
+                                      })}
+                                    </p>
+                                  </div>
+                                )}
+                                {(order as any).courierPartner && (
+                                  <div className="col-span-2">
+                                    <p className="text-xs text-gray-600 font-semibold">Courier Partner</p>
+                                    <p className="text-sm font-bold text-purple-700 mt-1">{(order as any).courierPartner}</p>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Shipped Info */}
+                          {order.status === 'shipped' && (order as any).dispatchDateTime && (
+                            <div className="bg-indigo-50 rounded-lg p-4 border border-indigo-200">
+                              <p className="text-xs text-indigo-600 font-semibold uppercase mb-3">🚀 Shipment Information</p>
+                              <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                  <p className="text-xs text-gray-600 font-semibold">Dispatched On</p>
+                                  <p className="text-sm font-bold text-gray-900 mt-1">
+                                    {new Date((order as any).dispatchDateTime).toLocaleString('en-IN', {
+                                      day: 'numeric',
+                                      month: 'short',
+                                      year: 'numeric',
+                                      hour: '2-digit',
+                                      minute: '2-digit'
+                                    })}
+                                  </p>
+                                </div>
+                                {(order as any).courierPartner && (
+                                  <div>
+                                    <p className="text-xs text-gray-600 font-semibold">Courier Partner</p>
+                                    <p className="text-sm font-bold text-indigo-700 mt-1">{(order as any).courierPartner}</p>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Delivered Info */}
+                          {order.status === 'delivered' && (order as any).deliveredDateTime && (
+                            <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+                              <p className="text-xs text-green-600 font-semibold uppercase mb-3">✅ Delivery Completed</p>
                               <div>
-                                <p className="text-xs text-gray-600 font-semibold">Expected Delivery</p>
+                                <p className="text-xs text-gray-600 font-semibold">Delivered On</p>
                                 <p className="text-sm font-bold text-gray-900 mt-1">
-                                  {new Date((order as any).deliveryDate).toLocaleDateString('en-IN', {
+                                  {new Date((order as any).deliveredDateTime).toLocaleString('en-IN', {
                                     day: 'numeric',
                                     month: 'short',
-                                    year: 'numeric'
+                                    year: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit'
                                   })}
                                 </p>
                               </div>
-                            )}
-                            {(order as any).courierPartner && (
-                              <div>
-                                <p className="text-xs text-gray-600 font-semibold">Courier Partner</p>
-                                <p className="text-sm font-bold text-green-700 mt-1">{(order as any).courierPartner}</p>
-                              </div>
-                            )}
-                          </div>
+                            </div>
+                          )}
                         </div>
                       )}
 
