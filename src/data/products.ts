@@ -31,7 +31,7 @@ export const products: Product[] = [
       '/Anti-Rust-Spray-500ml-Website-2.png'
     ],
     rating: 4.6,
-    reviews: 189,
+    reviews: 0,
     variants: [
       { name: '60ml', price: 90 },
       { name: '500ml', price: 425 }
@@ -73,7 +73,7 @@ export const products: Product[] = [
       '/Battery-Terminal-Mask-front.png'
     ],
     rating: 4.5,
-    reviews: 156,
+    reviews: 0,
     variants: [
       { name: '150ml', price: 265 },
       { name: '500ml', price: 675 }
@@ -115,7 +115,7 @@ export const products: Product[] = [
       '/Brake-Parts-Clean-backside.png'
     ],
     rating: 4.6,
-    reviews: 178,
+    reviews: 0,
     variants: [
       { name: '100ml', price: 205 },
       { name: '500ml', price: 435 }
@@ -157,7 +157,7 @@ export const products: Product[] = [
       '/vkhj.png'
     ],
     rating: 4.8,
-    reviews: 245,
+    reviews: 0,
     variants: [
       { name: '5 Ltr', price: 1800 }
     ],
@@ -178,7 +178,7 @@ export const products: Product[] = [
       '/car-wash-soap-1024x1024.png'
     ],
     rating: 4.5,
-    reviews: 128,
+    reviews: 0,
     variants: [
       { name: '1Ltr', price: 325 },
       { name: '5Ltr', price: 1100 }
@@ -221,7 +221,7 @@ export const products: Product[] = [
       '/Chain-Clean-front-1024x1024.png'
     ],
     rating: 4.3,
-    reviews: 95,
+    reviews: 0,
     variants: [
       { name: '100ml', price: 220 },
       { name: '500ml', price: 425 }
@@ -267,7 +267,7 @@ export const products: Product[] = [
       '/Chain-Lube-Spray-500ml-2-1024x1024.png'
     ],
     rating: 4.6,
-    reviews: 156,
+    reviews: 0,
     variants: [
       { name: '100ml', price: 175 },
       { name: '150ml', price: 250 },
@@ -314,7 +314,7 @@ export const products: Product[] = [
       '/Electrical-Parts-Clean-front-1024x1024.png'
     ],
     rating: 4.4,
-    reviews: 87,
+    reviews: 0,
     variants: [
       { name: '200ml', price: 275 },
       { name: '500ml', price: 425 }
@@ -362,7 +362,7 @@ export const products: Product[] = [
       '/WhatsApp-Image-2025-08-14-at-12.34.25-AM-1-Photoroom.png'
     ],
     rating: 4.5,
-    reviews: 112,
+    reviews: 0,
     variants: [
       { name: '1Ltr', price: 575 },
       { name: '5Ltr', price: 2750 }
@@ -410,7 +410,7 @@ export const products: Product[] = [
       '/Engin-oil-flush.png'
     ],
     rating: 4.2,
-    reviews: 76,
+    reviews: 0,
     variants: [
       { name: '50ml', price: 190 },
       { name: '250ml', price: 510 }
@@ -458,7 +458,7 @@ export const products: Product[] = [
       '/Engin-oil-treatment-1024x1024.png'
     ],
     rating: 4.4,
-    reviews: 98,
+    reviews: 0,
     variants: [
       { name: '50ml (Bikes)', price: 190 },
       { name: '250ml (Cars/SCVs/LCVs)', price: 500 }
@@ -492,60 +492,6 @@ export const products: Product[] = [
     onSale: false
   },
   {
-    id: 'injectonic-fuel-system-booster',
-    name: 'Injectonic - Fuel System Booster',
-    description: 'Boult Injectonic is a specially designed injector cleaner which cleans the fuel system without dismantling the injectors. It is designed to provide excellent performance, power and efficiency. Cleans the entire fuel system and removes carbon deposits.',
-    price: 150,
-    category: 'treatment',
-    images: [
-      '/img18-2-2-1.png'
-    ],
-    rating: 4.5,
-    reviews: 142,
-    variants: [
-      { name: '5ml (Bikes)', price: 150 },
-      { name: '20ml (3 Wheelers)', price: 280 },
-      { name: '100ml (Cars)', price: 450 },
-      { name: '250ml (LCVs/HCVs)', price: 850 }
-    ],
-    specifications: [
-      'Cleans entire fuel system',
-      'Removes carbon deposits',
-      'Improves fuel injection system life',
-      'Cleans injector nozzles',
-      'Ensures correct spray pattern',
-      'Optimizes fuel consumption',
-      'Increases fuel efficiency',
-      'Enhances complete combustion',
-      'Boosts engine performance',
-      'Helps reduce emissions'
-    ],
-    directions: [
-      'Pour Boult Injectonic in fuel tank during filling',
-      'Add as per recommended dosage for your vehicle',
-      'Keep engine running for 5 minutes in idle condition',
-      'Recommended at every service interval',
-      'Use when experiencing heavy black smoke',
-      'Dosage: 5ml for Bikes, 20ml for 3 wheelers, 100ml for Cars, 250ml for LCVs/HCVs'
-    ],
-    benefits: [
-      'Cleans entire fuel system effectively',
-      'Removes carbon deposits completely',
-      'Improves fuel injection system life',
-      'Cleans injector nozzles thoroughly',
-      'Ensures correct fuel spray pattern',
-      'Optimizes fuel consumption',
-      'Increases fuel efficiency significantly',
-      'Enhances complete combustion',
-      'Boosts engine performance',
-      'Helps reduce harmful emissions',
-      'No dismantling required',
-      'Easy to use and apply'
-    ],
-    featured: true,
-    onSale: false
-  },
-  {
     id: 'four-wheeler-kit',
     name: 'Four Wheeler Kit',
     description: 'Complete car care kit with 6 premium Boult products. Includes Plastic and Fibre Restorer, Anti Rust Spray, Microfiber Cloth, All in One Polish, Windshield Screen Wash, and Car Wash Soap. Everything you need for professional car maintenance and detailing.',
@@ -555,7 +501,7 @@ export const products: Product[] = [
       '/4W-Kit-1-1024x1024.png'
     ],
     rating: 4.7,
-    reviews: 203,
+    reviews: 0,
     variants: [{ name: 'Bundle', price: 675 }],
     specifications: [
       'Boult Plastic and Fibre Restorer (50ml)',
@@ -602,7 +548,7 @@ export const products: Product[] = [
       '/Multi-purpose-Micro-Fiber-Cloth.png'
     ],
     rating: 4.6,
-    reviews: 234,
+    reviews: 0,
     variants: [{ name: 'Single', price: 175 }],
     specifications: [
       '340 GSM thickness',
@@ -650,7 +596,7 @@ export const products: Product[] = [
       '/4W-Plastic-and-Fibre-Restorer.png'
     ],
     rating: 4.3,
-    reviews: 145,
+    reviews: 0,
     variants: [
       { name: '20ml', price: 225 },
       { name: '50ml', price: 375 }
@@ -704,7 +650,7 @@ export const products: Product[] = [
       '/bott-1024x1024.png'
     ],
     rating: 4.5,
-    reviews: 167,
+    reviews: 0,
     variants: [
       { name: '1 Ltr', price: 275 }
     ],
@@ -745,57 +691,6 @@ export const products: Product[] = [
     onSale: false
   },
   {
-    id: 'petrol-additive',
-    name: 'Petrol Additive',
-    description: 'Boult Petrol Additive is designed to clean and protect the fuel system including the injectors and intake valves. It ensures longer engine life, better power generation, and fuel saving. Cleans injectors and intake valves from carbon deposits.',
-    price: 50,
-    category: 'additive',
-    images: [
-      '/img18-2-2-1.png'
-    ],
-    rating: 4.4,
-    reviews: 167,
-    variants: [
-      { name: '5ml', price: 50 },
-      { name: '25ml', price: 180 }
-    ],
-    specifications: [
-      'Cleans injectors effectively',
-      'Cleans intake valves',
-      'Removes carbon deposits',
-      'Reduces misfire',
-      'Reduces ignition delay',
-      'Provides better combustion',
-      'Improves power generation',
-      'Improves fuel economy',
-      'Enhances engine life'
-    ],
-    directions: [
-      'Pour the contents into the petrol tank',
-      'Add as per recommended mixing ratio',
-      'For best results use at every fuel recharge',
-      'Mix thoroughly with fuel',
-      'Run engine normally after adding',
-      'Use regularly for optimal performance'
-    ],
-    benefits: [
-      'Cleans injectors from carbon deposits',
-      'Cleans intake valves effectively',
-      'Reduces misfire significantly',
-      'Reduces ignition delay',
-      'Provides better fuel combustion',
-      'Improves power generation',
-      'Improves fuel economy',
-      'Enhances engine life',
-      'Protects fuel system',
-      'Easy to use',
-      'Cost-effective solution',
-      'Regular use maintains performance'
-    ],
-    featured: false,
-    onSale: false
-  },
-  {
     id: 'rat-repellent-spray',
     name: 'Rat Repellent Spray',
     description: 'Effective rat repellent spray that repels rodents from the car engine area and protects cables, wires and rubber parts. Repels rodents for at least 3 months. Environment friendly, non-toxic and safe for human beings. Can be used for interior and exterior areas.',
@@ -805,7 +700,7 @@ export const products: Product[] = [
       '/boult-raat-repelent.png'
     ],
     rating: 4.2,
-    reviews: 89,
+    reviews: 0,
     variants: [
       { name: '50ml', price: 80 },
       { name: '200ml', price: 595 }
@@ -857,7 +752,7 @@ export const products: Product[] = [
       '/Spray-Paint-backside.png'
     ],
     rating: 4.4,
-    reviews: 134,
+    reviews: 0,
     variants: [
       { name: 'Regular', price: 300 },
       { name: 'Heat Resistant', price: 375 }
@@ -909,7 +804,7 @@ export const products: Product[] = [
       '/Throttle-and-Carburettor-Clean-500ml-Website-2.png'
     ],
     rating: 4.6,
-    reviews: 178,
+    reviews: 0,
     variants: [
       { name: '100ml', price: 225 },
       { name: '150ml', price: 280 },
@@ -962,7 +857,7 @@ export const products: Product[] = [
       '/2W-Kit-1-1024x1024.png'
     ],
     rating: 4.7,
-    reviews: 267,
+    reviews: 0,
     variants: [{ name: 'Bundle', price: 600 }],
     specifications: [
       'Boult Chain Lubricant Spray (150ml)',
@@ -1008,7 +903,7 @@ export const products: Product[] = [
       '/windsheild-wash-1024x1024.png'
     ],
     rating: 4.5,
-    reviews: 198,
+    reviews: 0,
     variants: [
       { name: '50ml Bottle', price: 50 },
       { name: '50ml Pouch', price: 25 }
@@ -1057,7 +952,7 @@ export const products: Product[] = [
       '/Silencer-Coat-matt-black-front-1024x1024.png'
     ],
     rating: 4.5,
-    reviews: 156,
+    reviews: 0,
     variants: [
       { name: '150ml', price: 290 },
       { name: '200ml', price: 375 }
@@ -1108,7 +1003,7 @@ export const products: Product[] = [
       '/Silencer-Coat-silver-front-1024x1024.png'
     ],
     rating: 4.5,
-    reviews: 156,
+    reviews: 0,
     variants: [
       { name: '150ml', price: 290 },
       { name: '400ml', price: 375 }
