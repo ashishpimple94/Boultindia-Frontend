@@ -289,7 +289,7 @@ export default function Checkout() {
                 items: orderItems,
                 status: 'paid',
                 paymentId: response.razorpay_payment_id,
-                date: new Date().toISOString(),
+                orderDate: new Date().toISOString(),
               }),
             });
 
@@ -400,7 +400,7 @@ export default function Checkout() {
             paymentMethod: formData.paymentMethod,
             items: orderItems,
             status: 'pending',
-            date: new Date().toISOString(),
+            orderDate: new Date().toISOString(),
           }),
         });
 
@@ -767,8 +767,8 @@ export default function Checkout() {
                 <span className="font-semibold">₹{total.toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between text-gray-700">
-                <span className="font-medium">Shipping</span>
-                <span className="text-green-600 font-semibold">Free</span>
+                <span className="font-medium">Shipping Charges</span>
+                <span className="text-gray-600 font-semibold text-sm">(To be calculated by admin)</span>
               </div>
             </div>
 

@@ -260,7 +260,7 @@ export const products: Product[] = [
   {
     id: 'chain-lubricant-spray',
     name: 'Chain Lubricant Spray',
-    description: 'Boult Chain Lubricant is a superior chain spray designed to protect the chains against wear and corrosion. The special formulation penetrates the vital parts of the bike chains and provides excellent, long-lasting protection. Compatible for all types of motorcycle and bicycle chains with O-ring, X-ring, and Z-ring.',
+    description: 'Boult Chain Lubricant is a superior chain spray designed to protect the chains against wear and corrosion. The special formulation penetrates the vital parts of the bike chains and provides excellent, long-lasting protection. It is compatible for all types of motorcycle and bicycle chains with (O-ring/ X-ring/ Z-ring) and operates at wide temperature range from -10°C to 150°C.',
     price: 175,
     category: 'lubricant',
     images: [
@@ -286,22 +286,18 @@ export const products: Product[] = [
     directions: [
       'Clean the chain surface with Boult Chain Cleaner spray',
       'Shake well before use',
-      'Spray with the extension tube evenly',
-      'Maintain distance of 6-8 inches from chain',
+      'Spray with the extension tube evenly from a distance of 6-8 inches',
       'Spray over entire length of the chain',
-      'Allow the product to settle for few minutes',
-      'Wipe excess with a clean cloth'
+      'Allow the product to settle for few minutes'
     ],
     benefits: [
-      'Excellent lubrication for all chain types',
-      'Superior protection against wear and corrosion',
-      'Tacky protective layer for long-lasting effect',
-      'Reduced wear extends chain life',
-      'Reduces friction for smooth operation',
-      'Ensures noiseless chain working',
-      'Wide temperature range operation',
+      'Provides excellent lubrication on all types of motorcycle and bicycle chains',
+      'The tacky & long-lasting protective layer provides superior protection against wear and corrosion',
+      'Reduced wear ensures longer life of chains',
+      'Reduces the friction and ensures smooth, noiseless working of chains',
+      'Compatible with O-ring, X-ring, Z-ring chains',
+      'Wide temperature range operation (-10°C to 150°C)',
       'Professional-grade protection',
-      'Compatible with all chain types',
       'Easy application with extension tube'
     ],
     featured: true,
@@ -455,7 +451,7 @@ export const products: Product[] = [
   {
     id: 'engine-oil-treatment',
     name: 'Engine Oil Treatment',
-    description: 'Boult Engine Oil Treatment with multi-polar formulation keeps the engine running smooth, quiet and efficient. Protects engine parts from oxidation, sludge and varnish deposition with strong anti-wear protection. Makes cold start easier and smoother.',
+    description: 'Boult Engine Oil Additive is equipped with synthetic formulation which forms a stable layer on the engine surfaces which ensures reduced friction and gives ultimate wear protection. Suitable for all types of Bikes, Cars and commercial vehicles and compatible with mineral and synthetic lubricants.',
     price: 500,
     category: 'treatment',
     images: [
@@ -464,7 +460,8 @@ export const products: Product[] = [
     rating: 4.4,
     reviews: 98,
     variants: [
-      { name: '250ml', price: 500 }
+      { name: '50ml (Bikes)', price: 190 },
+      { name: '250ml (Cars/SCVs/LCVs)', price: 500 }
     ],
     specifications: [
       'Multi-polar formulation',
@@ -477,26 +474,19 @@ export const products: Product[] = [
       'Strong anti-wear protection'
     ],
     directions: [
-      'Change older oil with new oil',
-      'Keep engine running idle for 5 minutes',
-      'Add Boult Engine Oil Additive into crank case as per dosage',
-      'Keep engine running again for 5 minutes in idle condition',
-      'Allow engine to cool before driving',
-      'Check oil level after treatment'
+      'Change the older oil with a new oil',
+      'Keep the engine running idle for 5 minutes',
+      'Add the Boult Engine Oil Additive into the crank case as per the dosage',
+      'Keep the engine running again for 5 minutes in idle condition for better results'
     ],
     benefits: [
-      'Keeps engine smooth and quiet',
-      'Improves engine efficiency',
-      'Protects from oxidation',
-      'Prevents sludge deposition',
-      'Prevents varnish buildup',
-      'Strong anti-wear protection',
-      'Easier cold starts',
-      'Smoother cold start operation',
-      'Reduces power loss',
-      'Improves fuel efficiency',
-      'Compatible with all vehicle types',
-      'Works with mineral and synthetic oils'
+      'The Multi polar formulation keeps the engine run smooth, quiet and efficient',
+      'Protects the engine parts from oxidation, sludge and varnish deposition',
+      'Gives strong anti-wear protection',
+      'Makes the cold start easier and smoother',
+      'Reduces the power loss and helps the fuel efficiency',
+      'Suitable for all types of Bikes, Cars and commercial vehicles',
+      'Compatible with mineral and synthetic lubricants'
     ],
     featured: false,
     onSale: false
