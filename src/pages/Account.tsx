@@ -9,6 +9,7 @@ interface Order {
   customer: string;
   email: string;
   amount: number;
+  shippingCharges?: number;
   status: string;
   date: string;
   items?: any[];
@@ -209,14 +210,23 @@ export default function Account() {
                   {orders.map((order) => (
                     <div key={order.id} className="border-2 border-gray-200 rounded-xl p-6 hover:shadow-lg transition">
                       {/* Order Header */}
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 pb-6 border-b border-gray-200">
+                      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6 pb-6 border-b border-gray-200">
                         <div>
                           <p className="text-xs text-gray-600 font-semibold uppercase">Order ID</p>
                           <p className="text-sm font-bold text-gray-900 mt-1">{order.id}</p>
                         </div>
                         <div>
+                          <p className="text-xs text-gray-600 font-semibold uppercase">Subtotal</p>
+                          <p className="text-sm font-semibold text-gray-900 mt-1">₹{order.amount ? order.amount.toLocaleString('en-IN') : '0'}</p>
+                          {order.shippingCharges > 0 && (
+                            <p className="text-xs text-gray-600 mt-1">+ Shipping: ₹{order.shippingCharges.toLocaleString('en-IN')}</p>
+                          )}
+                        </div>
+                        <div>
                           <p className="text-xs text-gray-600 font-semibold uppercase">Total Amount</p>
-                          <p className="text-lg font-bold text-orange-600 mt-1">₹{order.amount ? order.amount.toLocaleString('en-IN') : '0'}</p>
+                          <p className="text-lg font-bold text-orange-600 mt-1">
+                            ₹{((order.amount || 0) + (order.shippingCharges || 0)).toLocaleString('en-IN')}
+                          </p>
                         </div>
                         <div>
                           <p className="text-xs text-gray-600 font-semibold uppercase">Status</p>
@@ -292,11 +302,61 @@ export default function Account() {
                         </div>
                       )}
 
+                      {/* Order Summary with Shipping Charges */}
+                      <div className="bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg p-6 border-2 border-orange-200 mb-4">
+                        <h3 className="text-lg font-bold text-gray-900 mb-4">Order Summary</h3>
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-center pb-2 border-b border-orange-200">
+                            <span className="text-sm font-semibold text-gray-700">Subtotal</span>
+                            <span className="text-sm font-bold text-gray-900">₹{order.amount ? order.amount.toLocaleString('en-IN') : '0'}</span>
+                          </div>
+                          {order.shippingCharges > 0 && (
+                            <div className="flex justify-between items-center pb-2 border-b border-orange-200">
+                              <span className="text-sm font-semibold text-gray-700">Shipping Charges</span>
+                              <span className="text-sm font-bold text-orange-600">₹{order.shippingCharges.toLocaleString('en-IN')}</span>
+                            </div>
+                          )}
+                          <div className="flex justify-between items-center pt-2">
+                            <span className="text-lg font-bold text-gray-900">Grand Total</span>
+                            <span className="text-xl font-bold text-orange-600">
+                              ₹{((order.amount || 0) + (order.shippingCharges || 0)).toLocaleString('en-IN')}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
                       {/* Delivery Address */}
                       {order.address && (
                         <div className="bg-blue-50 rounded-lg p-4 border border-blue-200 mb-4">
                           <p className="text-xs text-blue-600 font-semibold uppercase mb-2">Delivery Address</p>
                           <p className="text-sm text-gray-900">{order.address}</p>
+                        </div>
+                      )}
+
+                      {/* Delivery Information - Show when order is processing */}
+                      {order.status === 'processing' && ((order as any).deliveryDate || (order as any).courierPartner) && (
+                        <div className="bg-green-50 rounded-lg p-4 border border-green-200 mb-4">
+                          <p className="text-xs text-green-600 font-semibold uppercase mb-3">📦 Delivery Information</p>
+                          <div className="grid grid-cols-2 gap-4">
+                            {(order as any).deliveryDate && (
+                              <div>
+                                <p className="text-xs text-gray-600 font-semibold">Expected Delivery</p>
+                                <p className="text-sm font-bold text-gray-900 mt-1">
+                                  {new Date((order as any).deliveryDate).toLocaleDateString('en-IN', {
+                                    day: 'numeric',
+                                    month: 'short',
+                                    year: 'numeric'
+                                  })}
+                                </p>
+                              </div>
+                            )}
+                            {(order as any).courierPartner && (
+                              <div>
+                                <p className="text-xs text-gray-600 font-semibold">Courier Partner</p>
+                                <p className="text-sm font-bold text-green-700 mt-1">{(order as any).courierPartner}</p>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       )}
 
