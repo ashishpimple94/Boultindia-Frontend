@@ -24,14 +24,6 @@ export default function DiscountBanner() {
       discount: '10%',
       validUntil: '31 Mar 2026',
       bgColor: 'from-orange-500 to-red-500'
-    },
-    {
-      id: 'FREESHIP',
-      title: 'Free Shipping',
-      description: 'Free shipping on all orders above ₹999',
-      discount: 'FREE',
-      validUntil: 'Ongoing',
-      bgColor: 'from-green-500 to-teal-500'
     }
   ];
 
