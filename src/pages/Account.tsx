@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { User, Package, LogOut, Mail, Phone, MapPin, Calendar } from 'lucide-react';
+import { User, Package, LogOut, Mail, Phone, MapPin, Calendar, FileText } from 'lucide-react';
 import OrderCancellation from '../components/OrderCancellation';
+import Invoice from '../components/Invoice';
 
 interface Order {
   id: string;
@@ -22,6 +23,7 @@ export default function Account() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [activeTab, setActiveTab] = useState('profile');
   const [loadingOrders, setLoadingOrders] = useState(false);
+  const [selectedOrderForInvoice, setSelectedOrderForInvoice] = useState<Order | null>(null);
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -455,6 +457,17 @@ export default function Account() {
                           />
                         </div>
                       )}
+
+                      {/* View Invoice Button */}
+                      <div className="mt-4">
+                        <button
+                          onClick={() => setSelectedOrderForInvoice(order)}
+                          className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg hover:from-blue-700 hover:to-blue-800 transition font-semibold shadow-md hover:shadow-lg"
+                        >
+                          <FileText size={18} />
+                          View Invoice
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -470,6 +483,41 @@ export default function Account() {
           )}
         </div>
       </div>
+
+      {/* Invoice Modal */}
+      {selectedOrderForInvoice && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <div className="bg-white rounded-xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto relative">
+            <button
+              onClick={() => setSelectedOrderForInvoice(null)}
+              className="sticky top-4 right-4 float-right bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition font-semibold z-10 shadow-lg"
+            >
+              Close
+            </button>
+            <div className="p-4">
+              <Invoice
+                order={{
+                  id: selectedOrderForInvoice.id,
+                  customer: selectedOrderForInvoice.customer,
+                  email: selectedOrderForInvoice.email,
+                  phone: user?.phone || '',
+                  address: selectedOrderForInvoice.address || '',
+                  city: (selectedOrderForInvoice as any).city || '',
+                  state: (selectedOrderForInvoice as any).state || '',
+                  pincode: (selectedOrderForInvoice as any).pincode || '',
+                  amount: selectedOrderForInvoice.amount,
+                  shippingCharges: selectedOrderForInvoice.shippingCharges,
+                  status: selectedOrderForInvoice.status,
+                  date: selectedOrderForInvoice.date,
+                  items: selectedOrderForInvoice.items || [],
+                  paymentMethod: (selectedOrderForInvoice as any).paymentMethod
+                }}
+                showPrintButton={true}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
