@@ -128,8 +128,8 @@ export default function Cart() {
                 <span className="font-semibold">₹{total.toLocaleString('en-IN')}</span>
               </div>
               <div className="flex justify-between text-gray-700">
-                <span className="font-medium">Shipping</span>
-                <span className="text-green-600 font-semibold">Free</span>
+                <span className="font-medium">Shipping Charges</span>
+                <span className="text-gray-600 text-sm font-semibold">(May apply)</span>
               </div>
               <div className="flex justify-between text-gray-700">
                 <span className="font-medium">Items</span>

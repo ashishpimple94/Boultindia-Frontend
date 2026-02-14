@@ -5,7 +5,6 @@ import { AuthProvider } from './context/AuthContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
-import DiscountBanner from './components/DiscountBanner';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
@@ -44,9 +43,6 @@ function App() {
         <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <ScrollToTop />
           <div className="flex flex-col min-h-screen bg-gray-50">
-            {/* Discount Banner */}
-            <DiscountBanner />
-            
             {/* Topbar Image */}
             <div className="w-full flex justify-center bg-white">
               <img 
