@@ -160,7 +160,7 @@ export default function ProductDetail() {
               </div>
               {product.onSale && product.discount && (
                 <div className="bg-red-500 text-white px-4 py-2 rounded-lg font-bold text-lg">
-                  -{product.discount}%
+                  {Math.abs(product.discount)}% OFF
                 </div>
               )}
             </div>

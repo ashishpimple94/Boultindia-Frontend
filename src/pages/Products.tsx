@@ -158,7 +158,7 @@ export default function Products() {
                     />
                     {product.onSale && product.discount && (
                       <div className="absolute top-3 right-3 bg-gradient-to-r from-red-600 to-red-500 text-white px-4 py-2 text-base font-bold shadow-2xl rounded-lg transform -rotate-3 border-2 border-white">
-                        -{product.discount}% OFF
+                        {Math.abs(product.discount)}% OFF
                       </div>
                     )}
                     {product.featured && (
@@ -231,7 +231,7 @@ export default function Products() {
                     />
                     {product.onSale && product.discount && (
                       <div className="absolute top-2 right-2 bg-gradient-to-r from-red-600 to-red-500 text-white px-3 py-1.5 text-sm font-bold shadow-xl rounded-lg border-2 border-white">
-                        -{product.discount}% OFF
+                        {Math.abs(product.discount)}% OFF
                       </div>
                     )}
                   </div>

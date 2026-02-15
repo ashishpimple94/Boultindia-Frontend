@@ -141,7 +141,7 @@ export default function Home() {
                     {/* Discount Badge */}
                     {product.onSale && product.discount && (
                       <div className="absolute top-4 right-4 bg-gradient-to-r from-red-600 to-red-500 text-white px-4 py-2 text-base font-bold shadow-2xl rounded-lg transform -rotate-3 border-2 border-white">
-                        -{product.discount}% OFF
+                        {Math.abs(product.discount)}% OFF
                       </div>
                     )}
                     
