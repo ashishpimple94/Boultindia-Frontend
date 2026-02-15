@@ -138,9 +138,16 @@ export default function Home() {
                     {/* Overlay on hover */}
                     <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
                     
+                    {/* Discount Badge */}
+                    {product.onSale && product.discount && (
+                      <div className="absolute top-4 right-4 bg-gradient-to-r from-red-600 to-red-500 text-white px-4 py-2 text-base font-bold shadow-2xl rounded-lg transform -rotate-3 border-2 border-white">
+                        -{product.discount}% OFF
+                      </div>
+                    )}
+                    
                     {/* Featured Badge */}
-                    <div className="absolute top-4 left-4 bg-gradient-to-r from-orange-400 to-orange-500 text-white px-3 py-1 text-xs font-bold shadow-md">
-                      FEATURED
+                    <div className="absolute top-4 left-4 bg-gradient-to-r from-orange-400 to-orange-500 text-white px-3 py-1.5 text-xs font-bold shadow-md rounded-md">
+                      ⭐ FEATURED
                     </div>
                   </div>
 

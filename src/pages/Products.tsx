@@ -157,13 +157,13 @@ export default function Products() {
                       loading="lazy"
                     />
                     {product.onSale && product.discount && (
-                      <div className="absolute top-3 right-3 bg-red-500 text-white px-3 py-1 text-sm font-bold shadow-lg">
-                        -{product.discount}%
+                      <div className="absolute top-3 right-3 bg-gradient-to-r from-red-600 to-red-500 text-white px-4 py-2 text-base font-bold shadow-2xl rounded-lg transform -rotate-3 border-2 border-white">
+                        -{product.discount}% OFF
                       </div>
                     )}
                     {product.featured && (
-                      <div className="absolute top-3 left-3 bg-orange-500 text-white px-3 py-1 text-xs font-bold shadow-lg">
-                        FEATURED
+                      <div className="absolute top-3 left-3 bg-gradient-to-r from-orange-600 to-orange-500 text-white px-3 py-1.5 text-xs font-bold shadow-lg rounded-md">
+                        ⭐ FEATURED
                       </div>
                     )}
                   </div>
@@ -230,8 +230,8 @@ export default function Products() {
                       loading="lazy"
                     />
                     {product.onSale && product.discount && (
-                      <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 text-xs font-bold">
-                        -{product.discount}%
+                      <div className="absolute top-2 right-2 bg-gradient-to-r from-red-600 to-red-500 text-white px-3 py-1.5 text-sm font-bold shadow-xl rounded-lg border-2 border-white">
+                        -{product.discount}% OFF
                       </div>
                     )}
                   </div>
