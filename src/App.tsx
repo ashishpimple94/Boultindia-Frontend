@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
+import ErrorBoundary from './components/ErrorBoundary';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
@@ -38,11 +39,12 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <AuthProvider>
-      <CartProvider>
-        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <ScrollToTop />
-          <div className="flex flex-col min-h-screen bg-gray-50">
+    <ErrorBoundary>
+      <AuthProvider>
+        <CartProvider>
+          <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+            <ScrollToTop />
+            <div className="flex flex-col min-h-screen bg-gray-50">
             {/* Topbar Image */}
             <div className="w-full flex justify-center bg-white">
               <img 
@@ -80,6 +82,7 @@ function App() {
         </Router>
       </CartProvider>
     </AuthProvider>
+    </ErrorBoundary>
   );
 }
 
