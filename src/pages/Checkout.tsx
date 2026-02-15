@@ -768,7 +768,7 @@ export default function Checkout() {
               </div>
               <div className="flex justify-between text-gray-700">
                 <span className="font-medium">Shipping Charges</span>
-                <span className="text-gray-600 font-semibold text-sm">(To be calculated by admin)</span>
+                <span className="text-blue-600 font-semibold text-sm italic">Calculated based on delivery location</span>
               </div>
             </div>
 
