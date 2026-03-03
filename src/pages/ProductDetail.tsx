@@ -28,32 +28,33 @@ export default function ProductDetail() {
     try {
       setLoading(true);
       
-      // Fetch all backend products
-      const backendProducts = await apiService.getProducts();
-      
-      // Normalize backend products
-      const normalizedBackendProducts = backendProducts.map(p => ({
-        ...p,
-        images: p.images || (p.image ? [p.image] : ['/placeholder-product.svg']),
-        rating: p.rating || 4.5,
-        reviews: p.reviews || 0,
-        variants: p.variants || [],
-        directions: p.directions || [],
-        benefits: p.benefits || []
-      }));
-      
-      // Try to find in backend products first, then fall back to static
-      let foundProduct = normalizedBackendProducts.find(p => p.id === id);
-      
-      if (!foundProduct) {
-        // Fallback to static products
-        foundProduct = staticProducts.find(p => p.id === id);
+      // Try to fetch single product from backend first
+      try {
+        const backendProduct = await apiService.getProductById(id!);
+        if (backendProduct) {
+          const normalizedProduct = {
+            ...backendProduct,
+            images: backendProduct.images || (backendProduct.image ? [backendProduct.image] : ['/placeholder-product.svg']),
+            rating: backendProduct.rating || 4.5,
+            reviews: backendProduct.reviews || 0,
+            variants: backendProduct.variants || [],
+            directions: backendProduct.directions || [],
+            benefits: backendProduct.benefits || []
+          };
+          setProduct(normalizedProduct);
+          return;
+        }
+      } catch (error) {
+        console.log('Backend product not found, trying static...');
       }
       
-      setProduct(foundProduct);
+      // Fallback to static products
+      const staticProduct = staticProducts.find(p => p.id === id);
+      setProduct(staticProduct);
+      
     } catch (error) {
       console.error('Error loading product:', error);
-      // Fallback to static products on error
+      // Final fallback to static products
       const staticProduct = staticProducts.find(p => p.id === id);
       setProduct(staticProduct);
     } finally {

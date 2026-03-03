@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://boult-india-bakend-new.onrender.com';
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5001';
 const MAX_RETRIES = 3;
 const RETRY_DELAY = 1000;
 
